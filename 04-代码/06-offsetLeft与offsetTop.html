@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    #father {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+      margin: 100px;
+      position: relative;
+    }
+    
+    #son {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      position: absolute;
+      left: 100px;
+      top: 100px;
+      
+      padding: 10px;
+      border: 10px solid #000;
+      margin: 10px;
+    }
+  
+  </style>
+</head>
+<body>
+
+
+
+<div id="father">
+  <div id="son"></div>
+</div>
+
+<script>
+  
+  var son = document.getElementById("son");
+  
+  
+  console.log(son.style.left);
+  
+  //获取的距离offsetParent
+  
+  //offsetLeft获取的是距离有定位的父元素 的真实的距离
+  //offsetLeft获取到的就是left值
+  // left + margin
+  console.log(son.offsetLeft);
+  
+  
+  //设置left的时候，style.left 设置
+  //获取left的时候，用offsetLeft
+</script>
+
+</body>
+</html>

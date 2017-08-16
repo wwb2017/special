@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<a href="http://www.baidu.com" id="link">注册成功，10秒后跳转</a>
+
+<script>
+  
+  var link = document.getElementById("link");
+  var num = 10;
+  var timeId = setInterval(function () {
+    num--;
+    link.innerHTML = "注册成功，" + num + "秒后跳转";
+    
+    if(num == 0) {
+      //需要跳转了
+      clearInterval(timeId);
+      location.href = "http://www.baidu.com";
+    }
+  }, 1000);
+
+</script>
+</body>
+</html>

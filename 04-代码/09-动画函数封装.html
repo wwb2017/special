@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    
+    div {
+      width: 100px;
+      height: 90px;
+      background-color: yellow;
+      border-top: 10px solid #36ff30;
+      border-radius: 10px;
+      
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="奔跑400吧,瑞瑞" id="btn1">
+<input type="button" value="奔跑800吧,瑞瑞" id="btn2">
+<div id="box"></div>
+
+<script>
+  
+  var btn1 = document.getElementById("btn1");
+  var btn2 = document.getElementById("btn2");
+  var box = document.getElementById("box");
+  
+  //点击btn，让box跑到400的方法
+  //目的：保存正在跑的定时器的id ，页面中只有唯一的定时器在跑
+  
+  
+  
+  btn1.onclick = function () {
+    animate(box, 400);
+  }
+
+  btn2.onclick = function () {
+    animate(box, 800);
+  }
+  
+  
+  //以前，timer绑定到window上， 所有的对象都共享了timer这个对象。相互影响。
+  //把timer绑定到自己这个对象的一个timer属性。保证每一个对象都会有一个自己timer，互不影响。
+  
+  
+  //1. box换成了element
+  //2. 把target换成了800
+  //3. 把全局的timer绑定element  保证定时器不会被别的对象干扰。
+  
+  //animate:  让任意的元素能够跑到任意的位置
+  function animate(element, target) {
+    //目的：每个对象 保证永远只有一个定时器在跑
+    clearInterval(element.timer);
+    element.timer = setInterval(function () {
+      
+      var step = 10;
+      var leader = element.offsetLeft;
+      console.log("代码还在运行");
+      if(leader < target) {
+        leader += step;
+        element.style.left = leader + "px";
+      } else {
+        //到达终点的时候，需要清除定时器
+        clearInterval(element.timer);
+      }
+    }, 15);
+  }
+</script>
+
+</body>
+</html>

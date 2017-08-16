@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #father {
+      width: 600px;
+      height: 600px;
+      background-color: pink;
+      position: relative;
+    }
+    
+    #son {
+      width: 400px;
+      height: 400px;
+      background-color: red;
+      position: relative;
+    }
+    
+    #grandSon {
+      width: 200px;
+      height: 200px;
+      background-color: cyan;
+      position: absolute;
+      top: 100px;
+      left: 100px;
+    }
+  </style>
+</head>
+<body>
+
+
+
+<div id="father">
+  <div id="son">
+    <div id="grandSon"></div>
+  </div>
+</div>
+
+<script>
+  
+  //offsetParent:
+  var grandSon = document.getElementById("grandSon");
+  
+  //亲爹
+  console.log(grandSon.parentNode);
+  
+  
+  //获取的是最近的有定位的父元素。 最后会找body
+  //干爹
+  console.log(grandSon.offsetParent);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    
+    div {
+      width: 100px;
+      height: 90px;
+      background-color: yellow;
+      border-top: 10px solid #36ff30;
+      border-radius: 10px;
+  
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="奔跑吧,瑞瑞" id="btn">
+<div id="box"></div>
+
+<script>
+
+  var btn = document.getElementById("btn");
+  var box = document.getElementById("box");
+  
+  //点击btn，让box跑到400的方法
+  var timer = null;
+  btn.onclick = function () {
+    //目的：保证永远只有一个定时器在跑
+    clearInterval(timer);
+    timer = setInterval(function () {
+      var step = 10;
+      var leader = box.offsetLeft;
+      console.log("代码还在运行");
+      if(leader < 400) {
+        leader += step;
+        box.style.left = leader + "px";
+      } else {
+        //到达终点的时候，需要清除定时器
+        clearInterval(timer);
+      }
+    }, 15);
+  }
+</script>
+
+</body>
+</html>

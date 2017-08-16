@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      padding: 10px;
+      border: 10px solid #000;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+
+<script>
+  
+  //需求：获取这个盒子的宽度和高度
+  var box = document.getElementById("box");
+  //style通常用来设置，不会用来获取
+  //1. style.xx获取的只能行内样式
+  //2. style.xx获取到的是字符串，带了px单位，不方便运算
+  //3. style.xx可以设置样式
+  //console.log(box.style.width);
+  //box.style.width = "300px";
+  
+  //1. 获取的是盒子真实的大小（width + padding + border）
+  //2. 获取的是数值类型，可以直接参与运算
+  //3. offsetWidth是只读属性。不能设置
+  //console.log(box.offsetWidth);
+  box.offsetWidth = "400";
+  
+  
+  
+  //我们设置盒子的宽高的时候， 只能用style.width
+  //获取盒子宽高的时候，使用offfsetWidth offsetHeight
+  
+</script>
+</body>
+</html>

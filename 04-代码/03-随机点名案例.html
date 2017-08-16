@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    table {
+      margin: 50px auto;
+    }
+    
+    td {
+      padding: 15px;
+      text-align: center;
+      /*border: 1px solid #000;*/
+    }
+    
+    input {
+      width: 100px;
+      height: 40px;
+    }
+  </style>
+
+</head>
+
+<body>
+<input type="button" value="开始" id="btn1">
+<input type="button" value="结束" id="btn2">
+
+</body>
+
+<script>
+  //名单，@为空位，中间的@为过道。以@开头的为不随机的座位
+  var list = [
+    ["@", "@", "@", "@", "胡聪聪", "@", "@", "@", "@", "@", "@", "@"],
+    ["余佳威", "王益枫", "王晓克", "陈小娟", "余健", "@", "姜桃", "庄正军", "李花艳", "钱逸伟", "王赟", "郑猛"],
+    ["王龙刚", "朱三辉", "冉旭", "施礼兵", "周扬", "@", "田方敏", "陈百威", "任炎峰", "刘宇", "杨停停", "李炜"],
+    ["王喆辰", "梁冰", "张嘉伟", "张秀男", "唐苏军", "@", "叶沉非", "夏水琴", "李沙", "易鑫", "孟祥慧", "刘植高"],
+    ["@", "@", "@", "@", "@", "@", "@", "@", "@", "@", "@", "@"],
+    ["张振杰", "徐跃进", "杨芳", "李志明", "王雪峰", "@", "赵云", "吴艳华", "奚甜甜", "李硕", "程苗", "李志刚"],
+    ["邱凌飞", "杨莹", "颜唯一", "李飞", "赵光宇", "@", "曾聪", "徐叶鑫", "魏文兵", "张颖", "杨慧明", "程秋强"],
+    ["王莹莹", "彭姜丽", "薛文娜", "杜维康", "欧阳敏", "@", "刘芸", "蔡鹏", "苏胜龙", "陈文中", "刘洋", "张涛"],
+    ["@", "易俊雄", "高清柱", "曾学炉", "陈彬", "@", "信占轩", "谭勇", "@", "@", "黄瑞", "@"]
+  ];
+  
+  //存储所有需要点名的人
+  var arr = [];
+  //根据生成一个表格
+  //1. 生成table，添加到body中
+  var table = document.createElement("table");
+  document.body.appendChild(table);
+  //2. 根据list.length生成tr，添加到table中
+  for (var i = 0; i < list.length; i++) {
+    // 创建这个节点
+    var tr = document.createElement("tr");
+    // 添加到某个节点中
+    table.appendChild(tr);
+    // 设置内容
+    //3. 根据list[i].length生成td，添加到tr中
+    for (var j = 0; j < list[i].length; j++) {
+      var td = document.createElement("td");
+      tr.appendChild(td);
+      
+      //设置内容, 如果坐人了，就设置内容和背景颜色
+      if (list[i][j] != "@") {
+        td.innerHTML = list[i][j];
+        td.style.backgroundColor = "yellowgreen";
+        //把所有需要点名的人 都存到arr中，随机只需要随机arr就行。
+        
+        if (list[i][j] == "胡聪聪") {
+          continue;
+        }
+        
+        arr.push(td);
+      }
+    }
+  }
+  
+  
+  //点击随机按钮，随机选中arr中的某一个td
+  var btn1 = document.getElementById("btn1");
+  var btn2 = document.getElementById("btn2");
+  
+  var timer = null;
+  
+  
+  //如果想要保证只有一个定时器跑， 在你开定时器之前，先清定时器。
+  btn1.onclick = function () {
+    //点击一次按钮，就会开启一个定时器
+    //一进来，先清除定时器
+    clearInterval(timer);
+    console.log("清除了定时器，定时器的id是" + timer);
+    timer = setInterval(function () {
+      var random = parseInt(Math.random() * arr.length);
+      for (var i = 0; i < arr.length; i++) {
+        arr[i].style.backgroundColor = "yellowgreen";
+      }
+      arr[random].style.backgroundColor = "hotpink";
+    }, 100);
+    
+    console.log("开启了定时器，定时器的id是" + timer);
+  }
+  
+  btn2.onclick = function () {
+    clearInterval(timer);
+    console.log("关闭了定时器，定时器的id是" + timer);
+  }
+
+
+</script>
+</html>

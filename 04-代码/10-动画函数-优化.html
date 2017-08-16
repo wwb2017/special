@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    div {
+      width: 100px;
+      height: 90px;
+      background-color: yellow;
+      border-top: 10px solid #36ff30;
+      border-radius: 10px;
+      
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="奔跑400吧,瑞瑞" id="btn1">
+<input type="button" value="奔跑800吧,瑞瑞" id="btn2">
+<div id="box"></div>
+
+<script>
+  
+  var btn1 = document.getElementById("btn1");
+  var btn2 = document.getElementById("btn2");
+  var box = document.getElementById("box");
+  
+  btn1.onclick = function () {
+    var stepX = 20;
+    var stepY = 20;
+    setInterval(function () {
+      var leaderX = box.offsetLeft;
+      var leaderY = box.offsetTop;
+      if(leaderX > 1200 || leaderX < 0){
+        stepX = -stepX;
+      }
+      
+      if(leaderY > 500 || leaderY < 0) {
+        stepY = -stepY;
+      }
+    
+      leaderX += stepX;
+      leaderY += stepY;
+      box.style.left = leaderX + "px";
+      box.style.top = leaderY + "px";
+    }, 15);
+  }
+  
+  
+  btn2.onclick = function () {
+    animate(box, 800);
+  }
+  
+  function animate(element, target) {
+    clearInterval(element.timer);
+    element.timer = setInterval(function () {
+      
+      
+      var leader = element.offsetLeft;
+      //step要有正负
+      
+      //说明盒子在目标右侧，需要往回跑
+      var step = target > leader ? 9 : -9;
+      
+      
+      // 判断我到终点的距离是否超过step ，如果超过，就可以跑
+      // 如果距离小于step，说明不够一步了，我就不跑了。 我们可以偷偷的抱过去。
+      var juli = Math.abs(leader - target);
+      if (juli > Math.abs(step)) {
+        leader += step;
+        element.style.left = leader + "px";
+      } else {
+        clearInterval(element.timer);
+        element.style.left = target + "px";
+      }
+    }, 15);
+  }
+</script>
+
+</body>
+</html>

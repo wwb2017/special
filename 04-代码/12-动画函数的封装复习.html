@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    
+    div {
+      width: 100px;
+      height: 90px;
+      background-color: yellow;
+      border-top: 10px solid #36ff30;
+      border-radius: 10px;
+      
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="奔跑400吧,瑞瑞" id="btn1">
+<input type="button" value="奔跑800吧,瑞瑞" id="btn2">
+<div id="box"></div>
+
+<script>
+  var btn1 = document.getElementById("btn1");
+  var btn2 = document.getElementById("btn2");
+  
+  btn1.onclick = function () {
+    animate(box, 400);
+  }
+  
+  btn2.onclick = function () {
+    animate(box, 800);
+  }
+  
+  function animate(element, target) {
+    clearInterval(element.timer);
+    element.timer = setInterval(function () {
+      var leader = element.offsetLeft;//盒子的当前位置left
+      var step = target > leader ? 10 : -10;
+      
+      //到达终点的距离如果大于一步的距离，可以跑，否则，清除定时器，
+      if(Math.abs(leader - target) >= Math.abs(step)) {
+        leader += step;
+        element.style.left = leader + "px";
+      }else {
+        clearInterval(element.timer);
+        element.style.left = target + "px";
+      }
+    
+    }, 15);
+  }
+</script>
+
+</body>
+</html>
